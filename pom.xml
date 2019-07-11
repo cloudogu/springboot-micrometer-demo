@@ -109,6 +109,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.cloudogu.cb</groupId>
+            <artifactId>command-bus-spring</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
     </dependencies>
 

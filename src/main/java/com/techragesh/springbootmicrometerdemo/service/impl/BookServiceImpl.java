@@ -1,10 +1,10 @@
 package com.techragesh.springbootmicrometerdemo.service.impl;
 
-import com.techragesh.springbootmicrometerdemo.dao.BookEntity;
 import com.techragesh.springbootmicrometerdemo.dao.BookRepository;
 import com.techragesh.springbootmicrometerdemo.mapper.BookMapper;
 import com.techragesh.springbootmicrometerdemo.model.Book;
 import com.techragesh.springbootmicrometerdemo.service.BookService;
+import de.triology.cb.CommandBus;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,9 @@ public class BookServiceImpl implements BookService{
 
     @Autowired
     private BookMapper bookMapper;
+
+    @Autowired
+    private CommandBus commandBus;
 
     public BookServiceImpl() {
         bookMapper = Mappers.getMapper(BookMapper.class);
@@ -47,11 +50,6 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Optional<Book> saveorupdateBook(Book book) {
-        if(book.getBookId()==0 || bookRepository.existsById(book.getBookId())) {
-            BookEntity bookEntity = bookRepository.save(bookMapper.fromBook(book));
-            return Optional.of(bookMapper.toBook(bookEntity));
-        }else {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(commandBus.execute(new AddBookCommand(book)));
     }
 }
