@@ -110,9 +110,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.cloudogu.cb</groupId>
+            <groupId>com.github.cloudogu.command-bus</groupId>
             <artifactId>command-bus-spring</artifactId>
-            <version>1.0.1</version>
+            <version>2221ce85</version>
         </dependency>
 
     </dependencies>
@@ -163,6 +163,10 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
